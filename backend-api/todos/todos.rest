@@ -1,0 +1,15 @@
+@baseUrl = {{$dotenv NEXT_PUBLIC_JSON_PLACE_HOLDER_URL}}
+
+# @name todosData
+GET {{baseUrl}}/todos
+X-Requested-With:XMLHttpRequest
+
+###
+
+@todo_id = {{todosData.response.body.$.[0].id}}
+
+# @name categoryData
+GET {{baseUrl}}/todos/{{todo_id}}
+X-Requested-With:XMLHttpRequest
+
+###

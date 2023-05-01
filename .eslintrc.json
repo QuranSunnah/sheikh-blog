@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "next",
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:storybook/recommended"
+  ],
+  "rules": {
+    "react-hooks/exhaustive-deps": "off",
+    "no-empty": "off"
+  }
+}

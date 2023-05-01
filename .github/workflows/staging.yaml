@@ -1,0 +1,70 @@
+name: "Deploy AmarPet application on staging server"
+
+on:
+  push:
+    tags:
+      - "v*.*.*-RC.*"
+
+jobs:
+  staging-build-deploy:
+    name: Staging server build and deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js 16.14.2
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.14.2
+      - run: npm i -g npm@8.5.0
+      - run: node -v
+      - run: npm -v
+      - run: export NVM_DIR=~/.nvm
+      - run: source ~/.nvm/nvm.sh
+      - run: cp .env.staging .env.local
+      - run: npm install
+      - run: npm run build
+
+      - name: Build file copy to staging server
+        if: ${{ success() }}
+        env:
+          host: ${{ secrets.STAGING_HOST }}
+          username: ${{ secrets.STAGING_USERNAME }}
+          key: ${{ secrets.STAGING_KEY }}
+          port: ${{ secrets.STAGING_PORT }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$key" >> ~/.ssh/id_rsa_amarpet
+          chmod 600 ~/.ssh/id_rsa_amarpet
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_rsa_amarpet
+          ssh-keyscan -H $host >> ~/.ssh/known_hosts
+          ssh $username@$host "cd /var/www/customer-panel/; rm -r .next;"
+          scp -r .next $username@$host:/var/www/customer-panel/.next/
+
+      - name: Executing remote ssh commands using password
+        if: ${{ success() }}
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.STAGING_HOST }}
+          username: ${{ secrets.STAGING_USERNAME }}
+          key: ${{ secrets.STAGING_KEY }}
+          port: ${{ secrets.STAGING_PORT }}
+          script: |
+            cd /var/www/customer-panel
+            git fetch --all
+            git checkout ${{github.ref_name}}
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            pm2 restart amarpet-staging
+
+      - name: Staging Build Status
+        if: ${{ failure() }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_ICON: https://amrpet.com/favicon.png
+          SLACK_MESSAGE: Staging Build Failed
+          SLACK_TITLE: AmarPet Frontend Staging Build Status
+          SLACK_USERNAME: AmarPet Frontend Staging Server
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
