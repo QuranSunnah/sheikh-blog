@@ -9,14 +9,15 @@ module.exports = {
   images: {
     remotePatterns: [
       {
+        
         protocol: "https",
-        hostname: process.env.NEXT_PUBLIC_AMARPET_REMOTE_PATTERN,
+        hostname: 'dev-admin.amarpet.com',
       },
 
       {
         protocol: "https",
         hostname:
-          process.env.NEXT_PUBLIC_AMARPET_DIGITALOCEAN_SPACE_REMOTE_PATTERN,
+          'amarpet-space.sgp1.digitaloceanspaces.com',
       },
     ],
   },

@@ -1,13 +1,16 @@
 import AuthBtn from "@/components/ui/button/authBtn";
 import PrimaryBtn from "@/components/ui/button/primaryBtn";
+
 import { useFetchTodos } from "@/repo/todos";
 import { closeLoader, startLoader } from "@/store/feature/loaderSlice";
-import { Button } from "flowbite-react";
+import { Button, Footer } from "flowbite-react";
 import { signOut, useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
+import Bottomnav  from '@/components/ui/bottom-nav';
+
 
 export default function Home() {
   const { data: session } = useSession();
@@ -21,7 +24,8 @@ export default function Home() {
   };
 
   return (
-    <main className={`flex min-h-screen flex-col items-center p-24`}>
+    <>
+<main className={`flex min-h-screen flex-col items-center p-24`}>
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex mb-4 gap-4">
         <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
           welcome to NextJS App
@@ -89,7 +93,14 @@ export default function Home() {
           </ul>
         )}
       </div>
+
+      
+
     </main>
+    <Bottomnav/>
+    </>
+    
+    
   );
 }
 
