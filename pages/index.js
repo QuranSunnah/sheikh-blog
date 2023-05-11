@@ -3,7 +3,7 @@ import PrimaryBtn from "@/components/ui/button/primaryBtn";
 
 import { useFetchTodos } from "@/repo/todos";
 import { closeLoader, startLoader } from "@/store/feature/loaderSlice";
-import { Button, Footer } from "flowbite-react";
+import { Button } from "flowbite-react";
 import { signOut, useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";

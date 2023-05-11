@@ -1,7 +1,7 @@
 import React from "react";
 import { FaFacebook } from "react-icons/fa";
-import { FaTwitter } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa";
+
+
 import { FaYoutube } from "react-icons/fa";
 function Bottomnav() {
     return (
@@ -12,7 +12,7 @@ function Bottomnav() {
 						<p className="text-gray-800 font-bold text-3xl pb-6">
 							Quran<span className="text-blue-600">Sunnah</span>
 						</p>
-            <img src="" ></img>
+           
 						
 					</ul>
 				</div>
