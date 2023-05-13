@@ -45,9 +45,7 @@ function PrimaryBtn({
       >
         {btnText}
       </p>
-      
     </button>
-    
   );
 }
 
