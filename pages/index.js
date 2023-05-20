@@ -10,6 +10,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import BottomNav from "@/components/ui/bottom-nav";
+import TopNav from "@/components/section/TopNav/TopNav";
 
 export default function Home() {
   const { data: session } = useSession();
@@ -24,9 +25,10 @@ export default function Home() {
 
   return (
     <>
+      <TopNav />
       <main className={`flex min-h-screen flex-col items-center p-24`}>
         <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex mb-4 gap-4">
-          <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
+          <p className=" left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
             welcome to NextJS App
           </p>
           <AuthBtn
