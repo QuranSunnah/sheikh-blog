@@ -6,20 +6,7 @@ module.exports = {
   reactStrictMode: true,
   swcMinify: true,
   i18n,
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: process.env.NEXT_PUBLIC_AMARPET_REMOTE_PATTERN,
-      },
 
-      {
-        protocol: "https",
-        hostname:
-          process.env.NEXT_PUBLIC_AMARPET_DIGITALOCEAN_SPACE_REMOTE_PATTERN,
-      },
-    ],
-  },
   eslint: {
     dirs: [
       "components",
