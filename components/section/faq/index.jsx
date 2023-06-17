@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const FaqComponent = ({ question, answer }) => {
   return (
@@ -11,6 +12,10 @@ const FaqComponent = ({ question, answer }) => {
       </details>
     </div>
   );
+};
+FaqComponent.propTypes = {
+  question: PropTypes.string,
+  answer: PropTypes.string,
 };
 
 export default FaqComponent;

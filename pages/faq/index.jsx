@@ -1,4 +1,4 @@
-import FaqComponent from "@/components/section/faq";
+import FaqComponent from "@/components/section/Faq";
 import { questions } from "@/utils/data/faq";
 import React from "react";
 
